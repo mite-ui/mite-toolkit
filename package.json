@@ -1,0 +1,19 @@
+{
+  "name": "kit",
+  "version": "1.0.0",
+  "description": "offline tools kit for react compoent",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zunyi-component/toolkit.git"
+  },
+  "author": "zunyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zunyi-component/toolkit/issues"
+  },
+  "homepage": "https://github.com/zunyi-component/toolkit#readme"
+}
