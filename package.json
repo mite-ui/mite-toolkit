@@ -1,10 +1,14 @@
 {
-  "name": "kit",
+  "name": "@zunyi/toolkit",
   "version": "1.0.0",
-  "description": "offline tools kit for react compoent",
+  "description": "offline tools kit for react component",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
+  },
+  "bin": {
+    "toolkit": "./bin/toolkit.js",
+    "toolkit-run": "./bin/toolkit-run.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/zunyi-component/toolkit/issues"
   },
-  "homepage": "https://github.com/zunyi-component/toolkit#readme"
+  "homepage": "https://github.com/zunyi-component/toolkit#readme",
+  "dependencies": {
+    "rc-tools": "^9.5.3"
+  },
+  "devDependencies": {}
 }
