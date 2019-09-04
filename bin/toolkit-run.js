@@ -1,1 +1,3 @@
-require("rc-tools/lib/cli/run");
+#!/usr/bin/env node
+
+require("../lib/cli/run");

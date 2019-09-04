@@ -1,27 +1,40 @@
 {
-  "name": "@zunyi/toolkit",
-  "version": "1.0.0",
+  "name": "@mite-ui/toolkit",
+  "version": "1.0.3",
   "description": "offline tools kit for react component",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "task": "node bin/toolkit-run.js"
   },
   "bin": {
-    "toolkit": "./bin/toolkit.js",
-    "toolkit-run": "./bin/toolkit-run.js"
+    "mite-toolkit": "./bin/toolkit.js",
+    "mite-toolkit-run": "./bin/toolkit-run.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zunyi-component/toolkit.git"
+    "url": "git+https://github.com/mite-ui/mite-toolkit.git"
   },
-  "author": "zunyi",
+  "author": "269881078@qq.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zunyi-component/toolkit/issues"
+    "url": "https://github.com/mite-ui/mite-toolkit/issues"
   },
-  "homepage": "https://github.com/zunyi-component/toolkit#readme",
+  "homepage": "https://github.com/mite-ui/mite-toolkit#readme",
   "dependencies": {
-    "rc-tools": "^9.5.3"
-  },
-  "devDependencies": {}
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "colorful": "^2.1.0",
+    "commander": "^3.0.0",
+    "glob": "^7.1.4",
+    "gulp": "^4.0.2",
+    "gulp-better-rollup": "^4.0.1",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.20.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
 }
