@@ -9,7 +9,9 @@ const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 
 const run = function() {
-  const cwd = process.cwd()
+  const cwd = process.cwd();
+  const pkg = require(cwd+'/package.json');
+  
   const inputOptions = {
     plugins: [
       babel({
@@ -24,9 +26,10 @@ const run = function() {
       commonjs(),
     ],
     external: (name) => {
-      return ['react', 'mite-ui'].includes(name)
-        || /^\@babel\/runtime/.test(name) 
-        || /^\./.test(name) 
+      return [...Object.keys(pkg.devDependencies)].includes(name)
+        || /^react/.test(name)
+        || /^\@babel\/runtime/.test(name)
+        || /^\./.test(name)
     }
   };
   const outputOptions = {};
