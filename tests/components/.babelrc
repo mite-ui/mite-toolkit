@@ -1,0 +1,16 @@
+{
+  "presets": [
+    "@babel/preset-react" // 编译react jsx
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime", {
+        "absoluteRuntime": false,
+        "corejs": false,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
+      }
+    ]
+  ]
+}

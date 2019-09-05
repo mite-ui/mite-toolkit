@@ -13,7 +13,7 @@ const proc = program.runningCommand
 if (proc) {
   proc.on('close', process.exit.bind(process))
   proc.on('exit', () => {
-    proc.exit(1);
+    process.exit(1);
   })
 }
 

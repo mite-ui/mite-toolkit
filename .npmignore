@@ -27,4 +27,4 @@ spm_modules
 .cache
 dist
 tests/*.css
-pnpm-lock.yaml
+yarn.lock
