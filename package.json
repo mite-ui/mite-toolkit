@@ -1,6 +1,6 @@
 {
   "name": "@mite-ui/toolkit",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "offline tools kit for react component",
   "main": "index.js",
   "scripts": {
