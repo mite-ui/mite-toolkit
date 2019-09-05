@@ -26,5 +26,5 @@ sea-modules
 spm_modules
 .cache
 dist
-tests/*.css
+tests/
 yarn.lock

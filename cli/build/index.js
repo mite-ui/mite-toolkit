@@ -9,6 +9,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 
 const run = function() {
+  const cwd = process.cwd()
   const inputOptions = {
     plugins: [
       babel({
@@ -24,34 +25,31 @@ const run = function() {
     ],
     external: (name) => {
       return ['react', 'mite-ui'].includes(name)
-      || /^\@babel\/runtime/.test(name)
+        || /^\@babel\/runtime/.test(name) 
+        || /^\./.test(name) 
     }
   };
   const outputOptions = {};
-  console.log(process.cwd());
-  glob(path.join(process.cwd() ,'/components/*'), (err, matches) => {
+  glob(cwd + '/components/**/*.@(js|ts|tsx|jsx)', (err, matches) => {
     if (err) {
       console.log(err);
       return;
     }
-    rimraf.sync(process.cwd() + '/lib')
-    rimraf.sync(process.cwd() + '/es')
+    rimraf.sync(cwd + '/lib')
+    rimraf.sync(cwd + '/es')
   
     matches.forEach((file) => {
-      const parse = path.parse(file)
-      if (/^_/.test(parse.name)) {
-        return;
-      }
-      let inputPath = file
-      if (parse.ext === '') {
-        inputPath = inputPath + '/index'
-      }
-      rollup.rollup({...inputOptions, input: inputPath}).then((bundle) => {
-        const outPath = process.cwd() + '/es/' + parse.name + '.js';
+      const relativePath = path.relative(cwd + '/components/', file);
+      const parse = path.parse(relativePath);
+
+      rollup.rollup({...inputOptions, input: file}).then((bundle) => {
+        
+        const outPath = path.join(cwd, 'es', parse.dir, parse.name + '.js');
         bundle.write({...outputOptions, format: 'esm', file: outPath});
       }).catch(err => console.log(err))
-      rollup.rollup({...inputOptions, input: inputPath}).then((bundle) => {
-        const outPath = process.cwd() + '/lib/' + parse.name + '.js';
+
+      rollup.rollup({...inputOptions, input: file}).then((bundle) => {
+        const outPath = path.join(cwd, 'lib', parse.dir, parse.name + '.js');
         bundle.write({...outputOptions, format: 'cjs', file: outPath});
       }).catch(err => console.log(err))
     })
