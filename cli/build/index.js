@@ -28,8 +28,9 @@ const run = function() {
       commonjs()
     ],
     external: (name) => {
-      const pkg = name.match(/([^\/]*)\/?/)[1]
-      return [...Object.keys(pkg.devDependencies)].includes(pkg)
+      const matches = name.match(/([^\/]*)\/?/)
+      const pkgName = matches && matches.length > 1 ? matches[1] : ''
+      return [...Object.keys(pkg.devDependencies)].includes(pkgName)
         || /^react/.test(name)
         || /^\@babel\/runtime/.test(name)
         || /^\./.test(name)

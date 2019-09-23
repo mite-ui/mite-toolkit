@@ -1,1 +1,0 @@
-import 'antd-mobile/lib/pull-to-refresh/style/index.less'
