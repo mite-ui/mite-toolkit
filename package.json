@@ -1,6 +1,6 @@
 {
   "name": "@mite-ui/toolkit",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "offline tools kit for react component",
   "main": "index.js",
   "scripts": {
@@ -32,12 +32,11 @@
     "glob": "^7.1.4",
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
-    "less-loader": "^5.0.0",
-    "node-less": "^1.0.0",
     "rimraf": "^3.0.0",
     "rollup": "^1.20.3",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-less": "^1.1.2",
     "rollup-plugin-node-resolve": "^5.2.0"
   }
 }

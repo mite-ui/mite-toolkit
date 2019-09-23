@@ -6,6 +6,7 @@ const rimraf = require('rimraf')
 
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
+const less = require('rollup-plugin-less');
 const babel = require('rollup-plugin-babel');
 
 const run = function() {
@@ -23,10 +24,12 @@ const run = function() {
           moduleDirectory: 'node_modules'
         }
       }),
-      commonjs(),
+      less(),
+      commonjs()
     ],
     external: (name) => {
-      return [...Object.keys(pkg.devDependencies)].includes(name)
+      const pkg = name.match(/([^\/]*)\/?/)[1]
+      return [...Object.keys(pkg.devDependencies)].includes(pkg)
         || /^react/.test(name)
         || /^\@babel\/runtime/.test(name)
         || /^\./.test(name)
