@@ -2,7 +2,7 @@
 * @Author: zunyi
 * @Date: 2021-10-28 16:02:17
  * @LastEditors: zunyi
- * @LastEditTime: 2021-11-02 13:48:14
+ * @LastEditTime: 2021-11-02 14:27:09
 */
 const { rollup } = require("rollup");
 const { babel, getBabelOutputPlugin } = require('@rollup/plugin-babel');
@@ -19,7 +19,7 @@ const glob = require('glob')
 const run = function (){
   const cwd = process.cwd();
   const pkg = require(cwd+'/package.json');
-  const indexFile = path.join(cwd, pkg.main);
+  const indexFile = path.join(cwd, pkg.index || pkg.main);
 
   const build = (outputPath, format, options) => {
     const external = (name) => {
@@ -107,7 +107,7 @@ const run = function (){
 
       rollup(inputOptions).then((bundle) => {
         bundle.write(outputOptions);
-      }).catch(err => console.err(err))
+      }).catch(err => console.log(err))
     }
   }
     
@@ -116,7 +116,7 @@ const run = function (){
   
   glob(cwd + '/src/**/*.@(js|ts|tsx|jsx)', (err, matches) => {
     if (err) {
-      console.err(err);
+      console.log(err);
       return;
     }
     matches.forEach((file) => {
