@@ -4,10 +4,10 @@ const glob = require('glob')
 const fs = require('fs')
 const rimraf = require('rimraf')
 
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const less = require('rollup-plugin-less');
-const babel = require('rollup-plugin-babel');
+const resolve = require('@rollup/plugin-node-resolve')
+const commonjs = require('@rollup/plugin-commonjs');
+// const less = require('rollup-plugin-less');
+const babel = require('@rollup/plugin-babel');
 
 const run = function() {
   const cwd = process.cwd();
@@ -24,7 +24,7 @@ const run = function() {
           moduleDirectory: 'node_modules'
         }
       }),
-      less(),
+      // less(),
       commonjs()
     ],
     external: (name) => {

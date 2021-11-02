@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require("../cli/lib/run");
+require("../cli/run");
