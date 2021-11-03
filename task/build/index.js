@@ -2,7 +2,7 @@
 * @Author: zunyi
 * @Date: 2021-10-28 16:02:17
  * @LastEditors: zunyi
- * @LastEditTime: 2021-11-02 14:27:09
+ * @LastEditTime: 2021-11-03 10:24:53
 */
 const { rollup } = require("rollup");
 const { babel, getBabelOutputPlugin } = require('@rollup/plugin-babel');
@@ -99,7 +99,7 @@ const run = function (){
 
       const relativePath = path.relative(cwd + '/src/', file);
       const parse = path.parse(relativePath);
-      const out = path.join(cwd, 'dist', outputPath, parse.dir, parse.name + `${
+      const out = path.join(cwd, outputPath, parse.dir, parse.name + `${
         options.multiple ? '' : '.' + format
       }` + '.js');
 
@@ -111,8 +111,8 @@ const run = function (){
     }
   }
     
-  const esBuild = build('es', 'esm', {replace: true, multiple: true})
-  const cjsBuild = build('lib', 'cjs', {replace: true, multiple: true})
+  const esBuild = build('dist/es', 'esm', {replace: true, multiple: true})
+  const cjsBuild = build('dist/lib', 'cjs', {replace: true, multiple: true})
   
   glob(cwd + '/src/**/*.@(js|ts|tsx|jsx)', (err, matches) => {
     if (err) {
@@ -125,9 +125,9 @@ const run = function (){
     })
   })
   
-  build('.', 'iife', {alias: true, sourcemap: true})(indexFile)
-  build('.', 'esm', {alias: true, sourcemap: true, babel: true})(indexFile)
-  build('.', 'cjs', {alias: true, sourcemap: true, babel: true})(indexFile)
+  build('dist', 'iife', {alias: true, sourcemap: true})(indexFile)
+  build('dist', 'esm', {alias: true, sourcemap: true, babel: true})(indexFile)
+  build('dist', 'cjs', {alias: true, sourcemap: true, babel: true})(indexFile)
 }
 
 module.exports = {
