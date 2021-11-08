@@ -2,7 +2,7 @@
 * @Author: zunyi
 * @Date: 2021-10-28 16:02:17
  * @LastEditors: zunyi
- * @LastEditTime: 2021-11-03 10:24:53
+ * @LastEditTime: 2021-11-08 11:03:52
 */
 const { rollup } = require("rollup");
 const { babel, getBabelOutputPlugin } = require('@rollup/plugin-babel');
@@ -43,7 +43,7 @@ const run = function (){
 
     const replacePlugin = replace({
       preventAssignment: true,
-      'sr\@c': outputPath
+      'sr\@c': path.join(pkg.name, outputPath)
     })
 
     const aliasPlugin = alias({
@@ -71,7 +71,13 @@ const run = function (){
       babel({
         babelHelpers: 'runtime',
         skipPreflightCheck: true,
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
+        plugins: [
+          '@babel/plugin-proposal-object-rest-spread',
+          '@babel/plugin-proposal-optional-chaining',
+          '@babel/plugin-syntax-dynamic-import',
+          '@babel/plugin-proposal-class-properties'
+        ]
       }),
       nodeResolve(),
       commonjs(),
@@ -111,8 +117,8 @@ const run = function (){
     }
   }
     
-  const esBuild = build('dist/es', 'esm', {replace: true, multiple: true})
-  const cjsBuild = build('dist/lib', 'cjs', {replace: true, multiple: true})
+  const esBuild = build('\/dist\/es', 'esm', {replace: true, multiple: true})
+  const cjsBuild = build('\/dist\/lib', 'cjs', {replace: true, multiple: true})
   
   glob(cwd + '/src/**/*.@(js|ts|tsx|jsx)', (err, matches) => {
     if (err) {
