@@ -2,7 +2,7 @@
 * @Author: zunyi
 * @Date: 2021-10-28 16:02:17
  * @LastEditors: zunyi
- * @LastEditTime: 2021-11-18 15:53:48
+ * @LastEditTime: 2021-11-18 16:49:58
 */
 const { rollup } = require("rollup");
 const { babel, getBabelOutputPlugin } = require('@rollup/plugin-babel');
@@ -27,7 +27,7 @@ const run = function (){
       const matches = name.match(/([^\/]*)\/?/);
       const pkgName = matches && matches.length > 1 ? matches[1] : '';
 
-      if(/\.vue$/.test(name)) return false
+      if(/\.vue$/.test(name) || /package\.json$/.test(name)) return false
       // if(/style-inject\.es\.js$/.test(name)) return false
 
       const innerExternal = /^\./.test(name)
