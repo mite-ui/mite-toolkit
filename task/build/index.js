@@ -2,7 +2,7 @@
 * @Author: zunyi
 * @Date: 2021-10-28 16:02:17
  * @LastEditors: zunyi
- * @LastEditTime: 2021-11-08 11:03:52
+ * @LastEditTime: 2021-11-18 15:53:48
 */
 const { rollup } = require("rollup");
 const { babel, getBabelOutputPlugin } = require('@rollup/plugin-babel');
@@ -13,6 +13,7 @@ const alias = require('@rollup/plugin-alias')
 const commonjs = require('@rollup/plugin-commonjs');
 const vuePlugin = require('rollup-plugin-vue')
 const replace = require('@rollup/plugin-replace')
+const json = require('@rollup/plugin-json')
 const path = require('path');
 const glob = require('glob')
 
@@ -59,6 +60,7 @@ const run = function (){
       clear({
         targets: [cwd + '/dist']
       }),
+      json(),
       vuePlugin({
         exposeFilename: false,
         target: 'browser'
