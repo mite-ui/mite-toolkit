@@ -2,13 +2,15 @@
 * @Author: zunyi
 * @Date: 2021-10-28 16:02:17
  * @LastEditors: zunyi
- * @LastEditTime: 2021-11-18 16:49:58
+ * @LastEditTime: 2021-12-10 10:13:42
 */
 const { rollup } = require("rollup");
 const { babel, getBabelOutputPlugin } = require('@rollup/plugin-babel');
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const clear = require('rollup-plugin-clear')
 const postcss = require('rollup-plugin-postcss')
+const sass = require('rollup-plugin-sass')
+
 const alias = require('@rollup/plugin-alias')
 const commonjs = require('@rollup/plugin-commonjs');
 const vuePlugin = require('rollup-plugin-vue')
@@ -61,6 +63,7 @@ const run = function (){
         targets: [cwd + '/dist']
       }),
       json(),
+      sass(),
       vuePlugin({
         exposeFilename: false,
         target: 'browser'

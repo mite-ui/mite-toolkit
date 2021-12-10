@@ -1,6 +1,6 @@
 {
   "name": "@mite-ui/toolkit",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "description": "offline tools kit for react component",
   "main": "index.js",
   "scripts": {
@@ -49,6 +49,7 @@
     "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-sass": "^1.2.10",
     "rollup-plugin-vue": "5.1.9",
     "vue-template-compiler": "^2.6.14"
   },
