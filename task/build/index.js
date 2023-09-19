@@ -2,7 +2,7 @@
 * @Author: zunyi
 * @Date: 2021-10-28 16:02:17
  * @LastEditors: zunyi
- * @LastEditTime: 2021-12-10 10:13:42
+ * @LastEditTime: 2023-09-18 16:38:36
 */
 const { rollup } = require("rollup");
 const { babel, getBabelOutputPlugin } = require('@rollup/plugin-babel');
@@ -11,6 +11,7 @@ const clear = require('rollup-plugin-clear')
 const postcss = require('rollup-plugin-postcss')
 const sass = require('rollup-plugin-sass')
 
+const image = require('@rollup/plugin-image')
 const alias = require('@rollup/plugin-alias')
 const commonjs = require('@rollup/plugin-commonjs');
 const vuePlugin = require('rollup-plugin-vue')
@@ -18,6 +19,9 @@ const replace = require('@rollup/plugin-replace')
 const json = require('@rollup/plugin-json')
 const path = require('path');
 const glob = require('glob')
+
+const fse = require('fs-extra')
+
 
 const run = function (){
   const cwd = process.cwd();
@@ -35,7 +39,8 @@ const run = function (){
       const innerExternal = /^\./.test(name)
       || /^lib\//.test(name)
       || /^es\//.test(name)
-      || /sr\@c\//.test(name);
+      || /^sr\@c\//.test(name)
+      || /^@\//.test(name)
       
       return [...Object.keys(pkg.devDependencies || {})].includes(pkgName)
        || /^vue/.test(name)
@@ -46,13 +51,14 @@ const run = function (){
 
     const replacePlugin = replace({
       preventAssignment: true,
-      'sr\@c': path.join(pkg.name, outputPath)
+      'sr\@c\/': path.join(pkg.name, outputPath, '/'),
+      '@\/': path.join(pkg.name, outputPath, '/'),
     })
 
     const aliasPlugin = alias({
       entries: [
         {
-          find: /^sr\@c/,
+          find: /(^sr\@c)|(^@)/,
           replacement: path.resolve(cwd, 'src')
         }
       ]
@@ -63,6 +69,7 @@ const run = function (){
         targets: [cwd + '/dist']
       }),
       json(),
+      image(),
       sass(),
       vuePlugin({
         exposeFilename: false,
@@ -121,7 +128,7 @@ const run = function (){
       }).catch(err => console.log(err))
     }
   }
-    
+   
   const esBuild = build('\/dist\/es', 'esm', {replace: true, multiple: true})
   const cjsBuild = build('\/dist\/lib', 'cjs', {replace: true, multiple: true})
   
@@ -135,6 +142,9 @@ const run = function (){
       cjsBuild(file)
     })
   })
+
+  fse.copy(path.join(cwd, 'src\/assets'), path.join(cwd, 'dist\/es\/assets'))
+  fse.copy(path.join(cwd, 'src\/assets'), path.join(cwd, 'dist\/lib\/assets'))
   
   build('dist', 'iife', {alias: true, sourcemap: true})(indexFile)
   build('dist', 'esm', {alias: true, sourcemap: true, babel: true})(indexFile)
